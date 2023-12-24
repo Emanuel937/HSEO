@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="login.css">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+</head>
+<body>
+    <section data="login">
+        <article data="form" >
+            <h1 class="h3 mb-3">S'inscricre</h1>
+            <p><small> Donec sit amet justo sed est rutrum accumsan ac in metus
+            </small>
+            </p>
+            <form  data="form-login"  onsubmit="registerUser(event)">
+                <input name="user" type ="text" class="form-control" required placeholder="Nom et prénon"/>
+                <input name="email" type="email" class="form-control" required placeholder="Entre votre adress mail"/>
+                <input name="password"  type="password" class="form-control" required placeholder="*****"/>
+                <input name="tel" type="tel" class="form-control" required placeholder="+337 XX XX XX">
+                <p class="p"><input type="checkbox"> I accept the
+                terms and conditions</p>
+                <button class="btn">Login</button>
+                <p id="response"  ></p>
+            </form>
+        </article>
+        <article data="login-img">
+                <img src="undraw_undraw_undraw_undraw_undraw_watch_notification_8mf3_-1-_rq1y_-1-_ifk0_-1-_m38m_w7ev.svg
+">
+        </article>
+    </section>
+</body>
+<script>
+    function registerUser(e) {
+        e.preventDefault();
+        var name = document.querySelector("input[name='user']").value;
+        var email = document.querySelector("input[name='email']").value;
+        var password = document.querySelector("input[name='password']").value;
+        var tel = document.querySelector("input[name='tel']").value;
+
+        // Validate input (you can add more validation)
+        if (name === '' || email === '' || password === '' || tel === '') {
+            document.getElementById("response").innerHTML = " *** All fields are required.";
+            return false; // Returning false to prevent the form from submitting
+        }
+
+        // Ajax request to check if the user already exists
+        fetch("src/logic/login.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: "action=checkUserExists&email=" + encodeURIComponent(email),
+        })
+            .then(response => response.text())
+            .then(response => {
+                if (response === "exists") {
+                    document.getElementById("response").innerHTML = "User with this email already exists.";
+                } else {
+                    // If the user doesn't exist, proceed with registration
+                    fetch("./src/logic/login.php", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: "action=registerUser&name=" + encodeURIComponent(name) +
+                            "&email=" + encodeURIComponent(email) +
+                            "&password=" + encodeURIComponent(password) +
+                            "&tel=" + encodeURIComponent(tel),
+                    })
+                        .then(response => response.text())
+                        .then(response => {
+                            document.getElementById("response").innerHTML = response;
+                        });
+                }
+            });
+
+        return false; // Returning false to prevent the form from submitting
+    }
+
+</script>
+</html>

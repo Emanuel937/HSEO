@@ -1,0 +1,46 @@
+section[data="login"]{
+    display: flex;
+    height: 100vh;
+}
+section[data="login"] article[data="form"]{
+    flex:50%;
+    background-color: #ffffff;
+    border-top-right-radius:20px ;
+    border-bottom-right-radius:20px ;
+    z-index: 10;
+
+    padding: 20vh 30vh 0px 15vh;
+}
+section[data="login"] article[data="form"] input{
+    margin: 20px auto ;
+    background-color:#fafafc
+
+}
+section[data="login"] article[data="form"] button{
+
+    border:1px solid lightgray;
+    width: 100px;
+    padding:7px;
+    text-align: center;
+    background-color:#2d67f6s
+}
+section article[data="login-img"]{
+    background-color:#2d67f6;
+    flex:50%;
+    margin-left: -20px;
+    background-image: url("shapes.png");
+    background-repeat: no-repeat;
+    background-size:cover
+}
+p{
+    color: #606060;
+    font-weight: 250;
+}
+img{
+    vertical-align: middle;
+    width: 300px;
+    margin: auto;
+    margin-top: auto;
+    display: block;
+    margin-top: 25%;
+}

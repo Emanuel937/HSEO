@@ -1,0 +1,12 @@
+[
+    {
+        "api_key"          :"AIzaSyDygRCiS1D6TpYJGWYjmJjKtfTO4rpcRVY",
+        "search_engine_id" :"041e380526ef74058",
+        "link"             :"https://www.googleapis.com/customsearch/v1?",
+        "parem"            :["key=","&cx=", "&q=", "&start=", "&num=","&cr="],
+        "coutryCode"       : {
+            "france":"countryFR"
+        },
+        "elem":["items", "link"]
+    }
+]
